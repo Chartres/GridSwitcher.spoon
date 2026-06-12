@@ -138,7 +138,7 @@ local function showSwitcher(self, windows)
   local n = 2
   for i, w in ipairs(wins) do
     local f = cellFrame(self, i)
-    local thumbFrame = {x=f.x+self.cellPad, y=f.y+self.cellPad, w=self.thumbW, h=self.thumbH}
+    local thumbFrame = {x=f.x+self.cellPad, y=f.y+self.titleH+self.cellPad, w=self.thumbW, h=self.thumbH}
     local app  = w:application()
     local icon = app and hs.image.imageFromAppBundle(app:bundleID() or '')
 
@@ -169,23 +169,22 @@ local function showSwitcher(self, windows)
     imgElem[i] = n
     n = n + 1
     canvas[n] = { type = 'resetClip' }
-    -- app icon badge
+    -- header: app icon + title above the thumbnail
+    local iconS = self.titleH - 6
     if icon then
       n = n + 1
       canvas[n] = {
         type = 'image', image = icon,
-        frame = {x = f.x + (cellW(self)-self.iconSize)/2,
-                 y = f.y + self.cellPad + self.thumbH - self.iconSize/2 - 8,
-                 w = self.iconSize, h = self.iconSize},
+        frame = {x = f.x + self.cellPad, y = f.y + 6, w = iconS, h = iconS},
       }
     end
-    -- title
     n = n + 1
     canvas[n] = {
       type = 'text', text = w:title() or '',
       textColor = {white=1, alpha=0.95}, textSize = 12.5,
-      textAlignment = 'center', textLineBreak = 'truncateTail',
-      frame = {x=f.x+8, y=f.y+self.cellPad+self.thumbH+8, w=cellW(self)-16, h=self.titleH-6},
+      textAlignment = 'left', textLineBreak = 'truncateTail',
+      frame = {x = f.x + self.cellPad + iconS + 6, y = f.y + 8,
+               w = cellW(self) - self.cellPad*2 - iconS - 6, h = self.titleH - 6},
     }
   end
 
