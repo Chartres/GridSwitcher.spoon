@@ -15,6 +15,13 @@ AltTab-style window switcher for [Hammerspoon](https://www.hammerspoon.org) — 
 - Snapshot caching + async refresh for fast open
 - Release Cmd/Option to focus the selected window (un-minimizes if needed)
 
+## Why GridSwitcher
+
+Free and open source, no tiers, no separate app. If you already run
+[Hammerspoon](https://www.hammerspoon.org), GridSwitcher gives you a previews
+grid switcher without installing another menu-bar utility or paying for one —
+every feature here is in the box, MIT-licensed, forever.
+
 ## Install
 
 1. Install Hammerspoon: `brew install --cask hammerspoon`
