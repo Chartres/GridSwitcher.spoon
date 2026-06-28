@@ -22,7 +22,7 @@ obj.homepage = 'https://github.com/Chartres/GridSwitcher.spoon'
 obj.thumbW       = 320
 obj.thumbH      = 200
 obj.cellPad      = 10
-obj.titleH       = 26
+obj.titleH       = 30
 obj.iconSize     = 40
 obj.margin       = 28
 obj.maxWFrac     = 0.92
@@ -76,7 +76,7 @@ local function asyncRefresh(self)
       return
     end
     local w = wins[i]
-    local snap = w:snapshot()
+    local snap = w:snapshot(true)  -- keepTransparency: don't fill rounded-corner gaps white ("ears")
     if snap then
       snapCache[w:id()] = {img=snap, t=hs.timer.secondsSinceEpoch()}
       local ei = imgElem[i]
@@ -175,7 +175,7 @@ local function showSwitcher(self, windows)
       n = n + 1
       canvas[n] = {
         type = 'image', image = icon,
-        frame = {x = f.x + self.cellPad, y = f.y + 6, w = iconS, h = iconS},
+        frame = {x = f.x + self.cellPad, y = f.y + 9, w = iconS, h = iconS},
       }
     end
     n = n + 1
@@ -183,7 +183,7 @@ local function showSwitcher(self, windows)
       type = 'text', text = w:title() or '',
       textColor = {white=1, alpha=0.95}, textSize = 12.5,
       textAlignment = 'left', textLineBreak = 'truncateTail',
-      frame = {x = f.x + self.cellPad + iconS + 6, y = f.y + 8,
+      frame = {x = f.x + self.cellPad + iconS + 6, y = f.y + 11,
                w = cellW(self) - self.cellPad*2 - iconS - 6, h = self.titleH - 6},
     }
   end
